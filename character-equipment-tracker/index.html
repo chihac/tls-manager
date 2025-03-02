@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Equipment Tracker</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+</head>
+<body>
+    <div id="app">
+        <div id="grid-container"></div>
+        <button id="add-character">Add Character</button>
+    </div>
+
+    <!-- Equipment Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Select Equipment</h2>
+            <form id="equipment-form">
+                <div class="form-group level-group"> <!-- Added class name -->
+                    <h3>Level</h3>
+                    <div class="radio-button-group">
+                        <div class="radio-button">
+                            <input type="radio" id="level-none" name="level" value="-">
+                            <label for="level-none">None</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="level-0" name="level" value="0">
+                            <label for="level-0">0</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="level-1" name="level" value="I">
+                            <label for="level-1">I</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="level-2" name="level" value="II">
+                            <label for="level-2">II</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="level-3" name="level" value="III">
+                            <label for="level-3">III</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="level-4" name="level" value="IV">
+                            <label for="level-4">IV</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="level-5" name="level" value="V">
+                            <label for="level-5">V</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group quality-group"> <!-- Added class name -->
+                    <h3>Quality</h3>
+                    <div class="radio-button-group">
+                        <div class="radio-button">
+                            <input type="radio" id="quality-none" name="quality" value="-">
+                            <label for="quality-none">None</label>
+                        </div>
+                        <div class="radio-button quality-bad">
+                            <input type="radio" id="quality-bad" name="quality" value="bad">
+                            <label for="quality-bad">Bad</label>
+                        </div>
+                        <div class="radio-button quality-decent">
+                            <input type="radio" id="quality-decent" name="quality" value="decent">
+                            <label for="quality-decent">Decent</label>
+                        </div>
+                        <div class="radio-button quality-bis">
+                            <input type="radio" id="quality-bis" name="quality" value="BiS">
+                            <label for="quality-bis">BiS</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Moved disabled checkbox to bottom -->
+                <div class="form-group disabled-group">
+                    <label for="disabled-checkbox" class="checkbox-container">
+                        <input type="checkbox" id="disabled-checkbox" name="disabled">
+                        <span class="checkbox-label">Disabled Equipment Slot</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">Save</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Rename Modal -->
+    <div id="rename-modal" class="modal">
+        <div class="modal-content">
+            <span class="close rename-close">&times;</span>
+            <h2>Rename Character</h2>
+            <form id="rename-form">
+                <div class="form-group">
+                    <label for="character-name">New Name:</label>
+                    <input type="text" id="character-name" name="character-name" class="form-input" required>
+                </div>
+                <button type="submit" class="submit-btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

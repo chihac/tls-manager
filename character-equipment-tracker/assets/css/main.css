@@ -1,0 +1,475 @@
+:root {
+  --bad-quality-color: #ff6b6b;
+  --decent-quality-color: #ffd166;
+  --bis-quality-color: #06d6a0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.cell {
+  width: 100%;
+  height: 100px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cell:hover {
+  background-color: #e0e0e0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.radio-group {
+  margin: 10px 0;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.equipment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  table-layout: fixed;
+  height: 80vh;
+}
+
+.equipment-table th,
+.equipment-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.equipment-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.clickable-cell {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.clickable-cell:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.05);
+}
+
+#add-character {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#add-character:hover {
+  background-color: #45a049;
+}
+
+/* Some example quality colors for reference */
+.bad-quality {
+  background-color: var(--bad-quality-color);
+}
+
+.decent-quality {
+  background-color: var(--decent-quality-color);
+}
+
+.bis-quality {
+  background-color: var(--bis-quality-color);
+}
+
+/* Remove any modal styling from main.css to avoid conflicts */
+
+/* Add styling for character headers and delete buttons */
+
+/* Character header styling - improved for text overflow */
+.character-header {
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  max-width: 120px; /* Control the maximum width */
+}
+
+/* Make character name look clickable and handle overflow better */
+.clickable-name {
+  cursor: pointer;
+  transition: color 0.2s;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  padding-right: 12px; /* Space for the pencil icon */
+}
+
+.clickable-name::after {
+  content: "✎";
+  opacity: 0;
+  font-size: 0.8em;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.2s;
+}
+
+.clickable-name:hover {
+  color: #4a76e8;
+}
+
+.clickable-name:hover::after {
+  opacity: 0.7;
+}
+
+/* Add styling for text input in rename form */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.form-input:focus {
+  border-color: #4a76e8;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 118, 232, 0.2);
+}
+
+label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.character-name {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Delete row and button styling */
+.delete-row {
+  border-top: 2px solid #ddd;
+}
+
+.delete-label {
+  text-align: left;
+  color: #888;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.delete-cell {
+  text-align: center;
+  padding: 5px;
+}
+
+/* Delete button styling */
+.delete-character-btn {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  width: 100%;
+  max-width: 70px;
+}
+
+.delete-character-btn:hover {
+  background-color: #ff4f4f;
+  transform: scale(1.05);
+}
+
+/* Add styling for disabled equipment slots */
+
+/* Style for disabled equipment slots */
+.disabled-slot {
+  background-color: #cccccc !important; /* Gray background */
+  color: #777; /* Darker text */
+  text-decoration: line-through; /* Strike-through text */
+  opacity: 0.8;
+}
+
+.clickable-cell.disabled-slot:hover {
+  transform: none; /* Don't scale up on hover */
+  opacity: 0.9;
+}
+
+/* Add styling for responsive equipment type headings */
+
+/* Equipment type header styling - reduced width */
+.equipment-type {
+  position: relative;
+  text-align: left;
+  width: 100px; /* Reduced from 130px */
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Full name is shown by default, abbreviation is hidden */
+.full-name {
+  display: inline-block;
+  max-width: 95px; /* Control text overflow within the cell */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  /* Overall padding reduction */
+  body {
+    padding: 10px;
+    overflow-x: hidden;
+  }
+  
+  /* Adjust table cells */
+  .equipment-table th,
+  .equipment-table td {
+    padding: 6px 3px;
+    font-size: 14px;
+    border-width: 1px; /* Ensure borders are thin */
+  }
+  
+  /* Reduce spacing between rows and cells */
+  .equipment-table {
+    border-spacing: 0;
+    margin-bottom: 15px;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .equipment-type {
+    width: 40px; /* Reduced from 50px */
+    max-width: 40px;
+    padding-left: 3px;
+    padding-right: 2px;
+  }
+  
+  /* Hide full name and show abbreviation on small screens */
+  .full-name {
+    display: none;
+  }
+  
+  .abbr-name {
+    display: inline-block;
+  }
+  
+  /* Character header adjustments */
+  .character-header {
+    padding: 8px 20px 8px 5px;
+    max-width: 80px;
+  }
+  
+  .character-name, .clickable-name {
+    font-size: 13px;
+    max-width: 100%; /* Use full width of parent */
+    padding-right: 10px; /* Adjust space for icon */
+  }
+  
+  .delete-character-btn {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further reduce padding */
+  body {
+    padding: 5px;
+  }
+  
+  h1 {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  
+  .equipment-table {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+  
+  .equipment-table th,
+  .equipment-table td {
+    padding: 4px 2px;
+    border-width: 1px;
+  }
+  
+  /* Minimize cell padding */
+  .clickable-cell {
+    padding: 3px 1px;
+  }
+  
+  /* Make delete button row more compact */
+  .delete-row th,
+  .delete-row td {
+    padding: 3px 2px;
+  }
+  
+  .equipment-type {
+    width: 30px;
+    max-width: 30px;
+    padding-left: 2px;
+    padding-right: 1px;
+  }
+  
+  .character-header {
+    max-width: 60px;
+    padding: 5px 15px 5px 3px;
+  }
+  
+  .character-name, .clickable-name {
+    font-size: 12px;
+  }
+  
+  .character-name {
+    font-size: 12px;
+  }
+  
+  .delete-character-btn {
+    font-size: 10px;
+    padding: 4px 6px;
+    max-width: 50px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  body {
+    padding: 3px 1px;
+  }
+  
+  .equipment-table th,
+  .equipment-table td {
+    padding: 3px 1px;
+  }
+  
+  .equipment-type {
+    max-width: 25px;
+    width: 25px;
+    padding: 0;
+  }
+  
+  .character-header {
+    max-width: 45px;
+    padding: 3px 12px 3px 2px;
+  }
+  
+  .character-name, .clickable-name {
+    font-size: 11px;
+    padding-right: 8px;
+  }
+  
+  .character-name {
+    font-size: 11px;
+  }
+  
+  .delete-character-btn {
+    font-size: 9px;
+    padding: 3px 4px;
+    max-width: 40px;
+  }
+  
+  /* Reduce add character button size */
+  #add-character {
+    padding: 8px 15px;
+    margin: 10px auto;
+    font-size: 14px;
+  }
+}
+
+/* Fix for iPhone SE and similar small devices */
+@media (max-width: 320px) {
+  body {
+    padding: 2px 0;
+  }
+  
+  .equipment-table th,
+  .equipment-table td {
+    padding: 2px 1px;
+    font-size: 10px;
+  }
+  
+  .clickable-cell {
+    height: 26px;
+  }
+}

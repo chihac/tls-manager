@@ -1,0 +1,454 @@
+.modal, #rename-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh; /* Limit height to viewport */
+  overflow-y: auto; /* Add scrolling for content that doesn't fit */
+  position: relative; /* For proper stacking */
+}
+
+.close, .rename-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus,
+.rename-close:hover,
+.rename-close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+h2 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group h3 {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+/* Radio Button Styling */
+.radio-button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.radio-button {
+  position: relative;
+  display: inline-block;
+}
+
+/* Hide the actual radio input */
+.radio-button input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Style the labels to look like buttons */
+.radio-button label {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  text-align: center;
+  user-select: none;
+}
+
+/* Style for when a radio button is checked */
+.radio-button input[type="radio"]:checked + label {
+  background-color: #4a76e8;
+  color: white;
+  border-color: #3a66d8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Style for keyboard focus */
+.radio-button input[type="radio"]:focus + label {
+  outline: 2px solid rgba(74, 118, 232, 0.5);
+}
+
+/* Quality-specific styles */
+.quality-bad label {
+  border-color: var(--bad-quality-color);
+}
+
+.quality-decent label {
+  border-color: var(--decent-quality-color);
+}
+
+.quality-bis label {
+  border-color: var(--bis-quality-color);
+}
+
+.quality-bad input[type="radio"]:checked + label {
+  background-color: var(--bad-quality-color);
+  border-color: var(--bad-quality-color);
+  color: white;
+}
+
+.quality-decent input[type="radio"]:checked + label {
+  background-color: var(--decent-quality-color);
+  border-color: var(--decent-quality-color);
+  color: #333; /* Dark text for better contrast on yellow */
+}
+
+.quality-bis input[type="radio"]:checked + label {
+  background-color: var(--bis-quality-color);
+  border-color: var(--bis-quality-color);
+  color: white;
+}
+
+/* Hover effects for the labels */
+.radio-button label:hover {
+  background-color: #eaeaea;
+  transform: translateY(-1px);
+}
+
+.quality-bad label:hover {
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.quality-decent label:hover {
+  background-color: rgba(255, 209, 102, 0.1);
+}
+
+.quality-bis label:hover {
+  background-color: rgba(6, 214, 160, 0.1);
+}
+
+/* Submit button */
+.submit-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Add styling for the dynamic modal title */
+#modal-title {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  font-size: 1.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Add styling for the disabled radio button option */
+
+/* Special styling for the disabled option */
+#level-disabled + label {
+  background-color: #e0e0e0;
+  border-color: #aaa;
+  color: #666;
+}
+
+#level-disabled:checked + label {
+  background-color: #888;
+  color: white;
+  border-color: #777;
+}
+
+#level-disabled:checked + label::before {
+  content: "✕";
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+/* Simplify the disabled checkbox toggle button by removing the circle and X */
+
+/* Simplified checkbox button styling */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+  user-select: none;
+}
+
+.checkbox-container input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-label {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #f5f5f5;
+  color: #666;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 2px solid #ddd;
+}
+
+/* Checked state styling - simplified */
+.checkbox-container input:checked + .checkbox-label {
+  background-color: #888;
+  color: white;
+  border-color: #777;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove these rules that added the circle and X
+.checkbox-label::before { ... }
+.checkbox-container input:checked + .checkbox-label::before { ... }
+.checkbox-container input:checked + .checkbox-label::after { ... }
+*/
+
+/* Update disabled group styling for bottom placement */
+.disabled-group {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-top: 1px solid #eee;
+  border-bottom: none;
+  padding-top: 15px;
+  padding-bottom: 0;
+}
+
+/* Hover effects for the toggle button */
+.checkbox-label:hover {
+  background-color: #eaeaea;
+  transform: translateY(-1px);
+}
+
+.checkbox-container input:checked + .checkbox-label:hover {
+  background-color: #777;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+  .radio-button-group {
+    justify-content: center;
+  }
+  
+  .radio-button label {
+    padding: 8px 12px;
+    min-width: 30px;
+    font-size: 14px;
+  }
+
+  .modal-content {
+    padding: 15px;
+    margin: 3% auto; /* Move up higher in the viewport */
+    width: 90%;
+    max-height: 85vh;
+  }
+  
+  /* Make radio buttons more compact */
+  .radio-button-group {
+    gap: 4px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .radio-button label {
+    padding: 6px 8px;
+    min-width: 24px;
+    font-size: 13px;
+  }
+  
+  /* Reduce spacing between form elements */
+  .form-group {
+    margin-bottom: 12px;
+  }
+  
+  .form-group h3 {
+    margin-bottom: 6px;
+    font-size: 1em;
+  }
+  
+  /* Make input field more compact */
+  .form-input {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  /* Reduce submit button size */
+  .submit-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  /* Ensure the title is more readable on mobile */
+  #modal-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  .checkbox-label {
+    padding: 10px 12px 10px 40px;
+    font-size: 14px;
+  }
+  
+  .checkbox-label::before {
+    width: 18px;
+    height: 18px;
+    left: 12px;
+  }
+  
+  .checkbox-container input:checked + .checkbox-label::after {
+    left: 16px;
+    font-size: 12px;
+  }
+  
+  .checkbox-label {
+    font-size: 14px;
+    padding-left: 25px;
+  }
+  
+  .checkbox-label::before {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .checkbox-container input:checked + .checkbox-label::after {
+    left: 4px;
+    top: -2px;
+    font-size: 16px;
+  }
+
+  .disabled-group {
+    margin-top: 15px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .modal-content {
+    padding: 10px;
+    margin: 2% auto;
+    max-height: 90vh;
+  }
+  
+  .radio-button-group {
+    gap: 2px;
+  }
+  
+  .radio-button label {
+    padding: 5px 6px;
+    min-width: 18px;
+    font-size: 11px;
+  }
+
+  #modal-title {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+
+  .checkbox-label {
+    padding: 8px 10px 8px 35px;
+    font-size: 12px;
+  }
+  
+  .checkbox-label::before {
+    width: 16px;
+    height: 16px;
+    left: 10px;
+  }
+  
+  .checkbox-container input:checked + .checkbox-label::after {
+    left: 14px;
+    font-size: 11px;
+  }
+
+  .disabled-group {
+    margin-top: 10px;
+    padding-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+/* Smallest screens and landscape mode on phones */
+@media (max-height: 500px), (max-width: 320px) {
+  .modal-content {
+    margin: 0 auto;
+    max-height: 100vh;
+    border-radius: 0;
+    width: 100%;
+    padding: 8px;
+  }
+  
+  /* Most compact display */
+  .radio-button-group {
+    margin-bottom: 5px;
+  }
+  
+  .form-group {
+    margin-bottom: 5px;
+  }
+  
+  .form-group h3 {
+    margin-bottom: 3px;
+  }
+  
+  /* Adjust spacing */
+  .close, .rename-close {
+    font-size: 24px;
+    line-height: 0.8;
+  }
+}
